@@ -1,0 +1,105 @@
+/* ============================================
+   TAILWIND CSS DIRECTIVES
+   ============================================ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+/* Root typography using system fonts */
+:root {
+    /* Arabic/Kurdish fonts with fallbacks */
+    --font-sans: 'Vazirmatn', 'Segoe UI', 'Tahoma', 'Arial', system-ui, sans-serif;
+    --font-display: 'Work Sans', 'Segoe UI', 'Arial', system-ui, sans-serif;
+
+    /* Color tokens (backup for Tailwind) */
+    --color-primary: #C0191F;
+    --color-background: #282F32;
+    --color-surface: #4D474F;
+    --color-text-main: #FDE3CF;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: #282F32;
+    color: #FDE3CF;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   SCROLLBAR HIDING
+   ============================================ */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ============================================
+   RTL SUPPORT
+   ============================================ */
+[dir="rtl"] .dir-ltr {
+    direction: ltr;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out forwards;
+}
+
+/* ============================================
+   CUSTOM UTILITY CLASSES
+   ============================================ */
+
+/* Smooth glow effect for buttons */
+.shadow-glow {
+    box-shadow: 0 0 20px rgba(192, 25, 31, 0.3), 0 0 40px rgba(192, 25, 31, 0.1);
+}
+
+/* Glass effect */
+.bg-surface-glass {
+    background: rgba(77, 71, 79, 0.4);
+}
+
+.shadow-glass {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Mask for scrollable areas */
+.mask-image-bottom {
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* ============================================
+   LEGACY ICON SAFETY (fallback)
+   ============================================ */
+
+/* Ensure lucide icons maintain their size */
+svg.lucide {
+    display: inline-flex !important;
+    flex-shrink: 0;
+    vertical-align: middle;
+}
