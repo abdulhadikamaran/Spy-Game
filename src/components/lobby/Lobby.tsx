@@ -62,6 +62,13 @@ export const Lobby: React.FC = () => {
       return;
     }
 
+    // Check if at least one category is selected for SYSTEM/MIXED modes
+    const needsSystemCategories = settings.wordSource === 'SYSTEM' || settings.wordSource === 'MIXED';
+    if (needsSystemCategories && settings.categoryIds.length === 0) {
+      triggerToast("تکایە لانی کەم یەک بابەت هەڵبژێرە!");
+      return;
+    }
+
     // Check constraints for custom words
     const isCustom = settings.wordSource === 'CUSTOM' || settings.wordSource === 'MIXED';
     if (isCustom && settings.customWords.length < 2) {
@@ -70,7 +77,7 @@ export const Lobby: React.FC = () => {
     }
 
     startGame();
-  }, [players.length, settings.wordSource, settings.customWords.length, startGame, triggerToast]);
+  }, [players.length, settings.wordSource, settings.categoryIds.length, settings.customWords.length, startGame, triggerToast]);
 
   const adjustTime = useCallback((minutes: number) => {
     const currentMinutes = settings.timerDuration / 60;
@@ -84,7 +91,7 @@ export const Lobby: React.FC = () => {
     let updated: string[];
 
     if (current.includes(id)) {
-      if (current.length === 1) return;
+      // Allow unchecking even the last category for better UX
       updated = current.filter(c => c !== id);
     } else {
       updated = [...current, id];
@@ -198,15 +205,19 @@ export const Lobby: React.FC = () => {
                   className="w-full h-20 bg-surface-glass backdrop-blur-md rounded-3xl flex items-center justify-between px-6 border border-white/5 hover:border-primary/50 transition-all duration-300 group shadow-glass active:scale-[0.98]"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:bg-primary group-hover:text-white transition-colors">
-                      <Icon name={selectedCount === 1 ? (CATEGORY_ICONS[primaryCatId] || 'grid_view') : 'layers'} className="text-2xl" />
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border transition-colors ${selectedCount === 0
+                      ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20'
+                      : 'bg-primary/10 text-primary border-primary/20 group-hover:bg-primary group-hover:text-white'}`}>
+                      <Icon name={selectedCount === 0 ? 'info' : selectedCount === 1 ? (CATEGORY_ICONS[primaryCatId] || 'grid_view') : 'layers'} className="text-2xl" />
                     </div>
                     <div className="flex flex-col items-start">
                       <span className="text-xs text-text-muted font-bold uppercase tracking-wider">بابەت (سیستەم)</span>
-                      <span className="font-black text-xl text-white group-hover:text-primary transition-colors">
-                        {selectedCount === 1
-                          ? (primaryCatObj?.name.split('(')[0] || 'هەڵبژاردن')
-                          : `${selectedCount} بابەت`
+                      <span className={`font-black text-xl transition-colors ${selectedCount === 0 ? 'text-yellow-500' : 'text-white group-hover:text-primary'}`}>
+                        {selectedCount === 0
+                          ? 'هەڵبژاردن'
+                          : selectedCount === 1
+                            ? (primaryCatObj?.name.split('(')[0] || 'هەڵبژاردن')
+                            : `${selectedCount} بابەت`
                         }
                       </span>
                     </div>
@@ -290,8 +301,8 @@ export const Lobby: React.FC = () => {
           <button
             onClick={handleStart}
             className={`group w-full h-20 rounded-3xl flex items-center justify-center px-6 transition-all ${isReady
-                ? "bg-primary hover:bg-primary-hover active:scale-[0.98] shadow-glow"
-                : "bg-white/10 shadow-none cursor-pointer"
+              ? "bg-primary hover:bg-primary-hover active:scale-[0.98] shadow-glow"
+              : "bg-white/10 shadow-none cursor-pointer"
               }`}
           >
             <span className={`text-2xl font-black tracking-wide ${isReady ? "text-white" : "text-text-muted/50"}`}>

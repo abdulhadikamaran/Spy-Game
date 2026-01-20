@@ -7,9 +7,15 @@ import { Icon } from '../ui/Icon';
 export const Handover: React.FC = () => {
   const players = useGameStore(state => state.players);
   const currentPlayerIndex = useGameStore(state => state.currentPlayerIndex);
+  const resetToLobby = useGameStore(state => state.resetToLobby);
 
   const controls = useAnimation();
   const [isExiting, setIsExiting] = useState(false);
+
+  const handleGoHome = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    resetToLobby();
+  };
 
   const currentPlayer = players[currentPlayerIndex];
 
@@ -45,7 +51,16 @@ export const Handover: React.FC = () => {
         <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4WgIYFPWZANALDqYQgzuOEsxnBSGtp18P8MnA9cO_imz7bah6NTOv-uO2lDoBPfgKKJCc9_c4dxAx3pzZ-nYesf-Py6qsiB8Pc9ChRTXUmWLHhXY4Yi6Jc2OOdMA_JNSdiQJuUuf4YIy7bozKF9aGB_VoAIilii_LNUFsb1FedlOLgSnDOUSTp1MlA41Cywo3g5RHpe-W_t4wVKoD0IgyLaZi5q-JOM8HZ26zdi4SSdbHEyrnMe6pvxFDF9YEii_EpXvjeS0RoMUM')" }}></div>
       </div>
 
-      <header className="relative z-10 w-full flex justify-center pt-14 pb-4 pointer-events-none">
+      <header className="relative z-10 w-full flex justify-between items-start pt-6 px-4 pb-4">
+        <div className="w-10" /> {/* Spacer for balance */}
+        <div /> {/* Center spacer */}
+        <button
+          onClick={handleGoHome}
+          className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-200 active:scale-95 pointer-events-auto"
+          title="گەڕانەوە بۆ لۆبی"
+        >
+          <Icon name="home" className="text-lg text-white/80" />
+        </button>
       </header>
 
       <main className="relative z-10 flex-1 flex flex-col items-center justify-center w-full px-6 -mt-10 pointer-events-none">

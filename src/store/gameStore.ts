@@ -100,7 +100,7 @@ export const useGameStore = create<GameState>()(
         const existingRecents = state.recentPlayers;
         // Merge, dedupe, and keep top 15
         const newRecents = Array.from(new Set([...currentNames, ...existingRecents])).slice(0, 15);
-        
+
         // 2. Pick Imposters
         const totalPlayers = players.length;
         const requestedSpies = settings.spiesCount;
@@ -132,35 +132,35 @@ export const useGameStore = create<GameState>()(
 
         // System Words
         if (useSystem) {
-           const targetCategories = CATEGORIES.filter(c => settings.categoryIds.includes(c.id));
+          const targetCategories = CATEGORIES.filter(c => settings.categoryIds.includes(c.id));
 
-           if (targetCategories.length === 0 && source === 'SYSTEM') {
-             targetCategories.push(CATEGORIES.find(c => c.id === 'general') || CATEGORIES[0]);
-           }
+          if (targetCategories.length === 0 && source === 'SYSTEM') {
+            targetCategories.push(CATEGORIES.find(c => c.id === 'general') || CATEGORIES[0]);
+          }
 
-           targetCategories.forEach(cat => {
-             // Use modified pack if available, otherwise default
-             const activeItems = packModifications[cat.id] || cat.items;
-             
-             const history = usedWords[cat.id] || [];
-             const available = activeItems.filter(item => {
-               const key = typeof item === 'string' ? item : item.en;
-               return !history.includes(key);
-             });
+          targetCategories.forEach(cat => {
+            // Use modified pack if available, otherwise default
+            const activeItems = packModifications[cat.id] || cat.items;
 
-             const itemsToAdd = available.length > 0 ? available : activeItems;
+            const history = usedWords[cat.id] || [];
+            const available = activeItems.filter(item => {
+              const key = typeof item === 'string' ? item : item.en;
+              return !history.includes(key);
+            });
 
-             itemsToAdd.forEach(item => {
-               pool.push({ item, categoryId: cat.id });
-             });
-           });
+            const itemsToAdd = available.length > 0 ? available : activeItems;
+
+            itemsToAdd.forEach(item => {
+              pool.push({ item, categoryId: cat.id });
+            });
+          });
         }
 
         // Custom Words
         if (useCustom && settings.customWords.length > 0) {
-           settings.customWords.forEach(w => {
-               pool.push({ item: w, categoryId: 'custom' });
-           });
+          settings.customWords.forEach(w => {
+            pool.push({ item: w, categoryId: 'custom' });
+          });
         }
 
         if (pool.length === 0) return;
@@ -172,13 +172,13 @@ export const useGameStore = create<GameState>()(
         const catId = candidate.categoryId;
 
         if (catId !== 'custom') {
-            const key = typeof selectedWord === 'string' ? selectedWord : selectedWord.en;
-            const currentCatHistory = usedWords[catId] || [];
-            const newHistory = [...currentCatHistory, key];
+          const key = typeof selectedWord === 'string' ? selectedWord : selectedWord.en;
+          const currentCatHistory = usedWords[catId] || [];
+          const newHistory = [...currentCatHistory, key];
 
-            set(s => ({
-                usedWords: { ...s.usedWords, [catId]: newHistory }
-            }));
+          set(s => ({
+            usedWords: { ...s.usedWords, [catId]: newHistory }
+          }));
         }
 
         set({

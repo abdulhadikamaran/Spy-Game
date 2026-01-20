@@ -15,8 +15,10 @@ export const WordRow: React.FC<WordRowProps> = React.memo(({ item, index, onRemo
             <span className="font-bold text-text-main">{item}</span>
          ) : (
             <div className="flex flex-col">
-               <span className="font-bold text-text-main">{item.ku}</span>
-               <span className="text-xs text-text-muted font-sans text-left dir-ltr">{item.en}</span>
+               {/* LINE 1 (TOP): ENGLISH - Dominant */}
+               <span className="text-lg font-bold text-white tracking-wide font-sans text-left dir-ltr">{item.en}</span>
+               {/* LINE 2 (BOTTOM): KURDISH - Secondary */}
+               <span className="text-sm font-medium text-gray-400 mt-0.5">{item.ku}</span>
             </div>
          )}
          <button

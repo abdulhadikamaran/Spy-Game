@@ -37,6 +37,7 @@ import {
     Pause,
     Info,
     FolderOpen,
+    UtensilsCrossed,
     type LucideIcon,
 } from 'lucide-react';
 
@@ -92,6 +93,8 @@ const iconMap: Record<string, LucideIcon> = {
     movie: Film,
     sports_esports: Gamepad2,
     star: Star,
+    videogame_asset: Gamepad2,
+    restaurant: UtensilsCrossed,
 
     // Gestures
     touch_app: Hand,

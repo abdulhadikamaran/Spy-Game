@@ -7,11 +7,16 @@ export const RevealCard: React.FC = () => {
   const currentPlayerIndex = useGameStore(state => state.currentPlayerIndex);
   const currentWord = useGameStore(state => state.currentWord);
   const nextPlayer = useGameStore(state => state.nextPlayer);
+  const resetToLobby = useGameStore(state => state.resetToLobby);
 
   const player = players[currentPlayerIndex];
 
   const handleHide = () => {
     nextPlayer();
+  };
+
+  const handleGoHome = () => {
+    resetToLobby();
   };
 
   useEffect(() => {
@@ -28,7 +33,17 @@ export const RevealCard: React.FC = () => {
     <div className="h-screen w-full font-display text-white selection:bg-primary selection:text-white flex flex-col relative overflow-hidden bg-background">
       <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
 
-      <header className="relative z-10 w-full pt-12 pb-4 flex-none"></header>
+      <header className="relative z-10 w-full pt-6 pb-4 px-4 flex justify-between items-start flex-none">
+        <div className="w-10" /> {/* Spacer for balance */}
+        <div /> {/* Center spacer */}
+        <button
+          onClick={handleGoHome}
+          className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-200 active:scale-95"
+          title="گەڕانەوە بۆ لۆبی"
+        >
+          <Icon name="home" className="text-lg text-white/80" />
+        </button>
+      </header>
 
       <main className="relative z-10 w-full flex-1 flex flex-col items-center justify-center px-6 py-4">
         <div className="relative w-full max-w-sm aspect-[4/5] max-h-[60vh] rounded-[2.5rem] shadow-2xl border bg-[#1E1E1E] border-white/5 flex flex-col overflow-hidden group">
@@ -64,8 +79,10 @@ export const RevealCard: React.FC = () => {
                     <h1 className="text-white text-5xl md:text-6xl font-black leading-tight text-center break-words w-full drop-shadow-lg">{currentWord}</h1>
                   ) : (
                     <div className="flex flex-col items-center gap-2">
-                      <h1 className="text-white text-5xl md:text-6xl font-black leading-tight text-center break-words w-full drop-shadow-lg">{currentWord?.ku}</h1>
-                      <p className="text-text-muted text-2xl font-bold font-serif italic tracking-wide opacity-80">{currentWord?.en}</p>
+                      {/* LINE 1 (TOP): ENGLISH - BIGGEST */}
+                      <h1 className="text-white text-4xl md:text-5xl font-black leading-tight text-center break-words w-full drop-shadow-lg font-sans">{currentWord?.en}</h1>
+                      {/* LINE 2 (BOTTOM): KURDISH - SMALLER */}
+                      <p className="text-gray-400 text-xl font-bold tracking-wide mt-2">{currentWord?.ku}</p>
                     </div>
                   )}
                 </div>

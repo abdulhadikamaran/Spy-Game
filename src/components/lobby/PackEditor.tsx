@@ -4,6 +4,7 @@ import { CATEGORIES } from '../../data/wordPacks';
 import { WordItem } from '../../types';
 import { WordRow } from './WordRow';
 import { Icon } from '../ui/Icon';
+import { ConfirmModal } from '../ui/ConfirmModal';
 
 interface PackEditorProps {
    categoryId: string;
@@ -19,6 +20,7 @@ export const PackEditor: React.FC<PackEditorProps> = ({ categoryId, onBack }) =>
 
    const [kuVal, setKuVal] = useState('');
    const [enVal, setEnVal] = useState('');
+   const [showResetModal, setShowResetModal] = useState(false);
 
    const currentItems = packModifications[categoryId] || (category ? category.items : []);
 
@@ -49,10 +51,13 @@ export const PackEditor: React.FC<PackEditorProps> = ({ categoryId, onBack }) =>
       setEnVal('');
    };
 
-   const handleReset = () => {
-      if (confirm('دڵنیایت؟ هەموو گۆڕانکارییەکان دەسڕێتەوە و دەگەڕێتەوە دۆخی سیستەم.')) {
-         resetPack(categoryId);
-      }
+   const handleResetClick = () => {
+      setShowResetModal(true);
+   };
+
+   const handleResetConfirm = () => {
+      resetPack(categoryId);
+      setShowResetModal(false);
    };
 
    return (
@@ -70,12 +75,12 @@ export const PackEditor: React.FC<PackEditorProps> = ({ categoryId, onBack }) =>
                )}
             </div>
             <button
-               onClick={handleReset}
+               onClick={handleResetClick}
                disabled={!isModified}
-               className="p-2 rounded-full hover:bg-red-500/10 text-text-muted hover:text-red-500 disabled:opacity-20 disabled:hover:bg-transparent disabled:hover:text-text-muted transition-colors"
+               className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/30 text-text-muted hover:text-red-400 disabled:opacity-20 disabled:bg-transparent disabled:border-transparent disabled:hover:bg-transparent disabled:hover:text-text-muted transition-all duration-200 active:scale-95"
                title="گەڕاندنەوەی سەرەتا"
             >
-               <Icon name="restart_alt" />
+               <Icon name="restart_alt" className="text-lg" />
             </button>
          </div>
 
@@ -131,6 +136,17 @@ export const PackEditor: React.FC<PackEditorProps> = ({ categoryId, onBack }) =>
                </div>
             )}
          </div>
+
+         <ConfirmModal
+            isOpen={showResetModal}
+            title="گەڕاندنەوەی سەرەتا"
+            message="دڵنیایت؟ هەموو گۆڕانکارییەکان دەسڕێتەوە و دەگەڕێتەوە بۆ دۆخی سیستەم."
+            confirmText="بەڵێ، بیگەڕێنەوە"
+            cancelText="نەخێر"
+            variant="danger"
+            onConfirm={handleResetConfirm}
+            onCancel={() => setShowResetModal(false)}
+         />
       </div>
    );
 };
