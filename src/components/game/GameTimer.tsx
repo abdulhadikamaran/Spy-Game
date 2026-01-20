@@ -4,7 +4,7 @@ import { GamePhase } from '../../types';
 import { motion } from 'framer-motion';
 import { Icon } from '../ui/Icon';
 
-export const GameTimer: React.FC = () => {
+export const GameTimer: React.FC = React.memo(() => {
   const timerDuration = useGameStore(state => state.settings.timerDuration);
   const players = useGameStore(state => state.players);
 
@@ -238,4 +238,4 @@ export const GameTimer: React.FC = () => {
       </div>
     </div>
   );
-};
+});

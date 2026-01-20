@@ -103,3 +103,25 @@ svg.lucide {
     flex-shrink: 0;
     vertical-align: middle;
 }
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+/* GPU acceleration for hover effects - reduces paint costs */
+.gpu-accelerate {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Apply will-change to interactive elements for smooth animations */
+button,
+[role="button"] {
+    will-change: transform;
+}
+
+/* Content visibility for large lists - skips offscreen rendering */
+.content-visibility-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 60px;
+}

@@ -7,6 +7,14 @@ export default defineConfig({
     minify: 'esbuild',
     cssMinify: true,
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'framer-motion', 'zustand'],
+          icons: ['lucide-react'],
+        },
+      },
+    },
   },
   plugins: [
     react(),
