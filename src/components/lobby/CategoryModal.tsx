@@ -17,6 +17,10 @@ const CATEGORY_ICONS: Record<string, string> = {
   meals: 'restaurant',
 };
 
+const toKurdishNum = (num: number | string) => {
+  return num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+};
+
 interface CategoryModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -125,30 +129,16 @@ export const CategoryModal: React.FC<CategoryModalProps> = React.memo(({ isOpen,
                             <Icon name={icon} className="text-3xl" />
                           </div>
 
-                          {/* Category Names - ENGLISH ON TOP (Dominant), KURDISH BELOW (Secondary) */}
+                          {/* Category Names - KURDISH ONLY (Primary) */}
                           <div className="flex flex-col items-center">
-                            {english ? (
-                              <>
-                                {/* LINE 1 (TOP): ENGLISH - text-2xl font-bold text-white tracking-wide */}
-                                <h4 className="text-2xl font-bold text-white tracking-wide">
-                                  {english}
-                                </h4>
-                                {/* LINE 2 (BOTTOM): KURDISH - text-sm font-medium text-gray-400 mt-1 */}
-                                <span className="text-sm font-medium text-gray-400 mt-1">
-                                  {kurdish}
-                                </span>
-                              </>
-                            ) : (
-                              /* Kurdish Only */
-                              <h4 className="text-2xl font-bold text-white tracking-wide">
-                                {kurdish}
-                              </h4>
-                            )}
+                            <h4 className="text-2xl font-bold text-white tracking-wide">
+                              {kurdish}
+                            </h4>
                           </div>
 
                           {/* Word Count Badge */}
                           <div className="mt-3 text-xs font-medium text-text-muted/50 bg-black/20 px-3 py-1 rounded-full">
-                            {cat.items.length} وشە
+                            {toKurdishNum(cat.items.length)} وشە
                           </div>
                         </div>
                       );
