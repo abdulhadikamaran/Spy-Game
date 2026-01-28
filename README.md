@@ -1,103 +1,117 @@
-# 🕵️‍♂️ Kurdspyy (Kurdish Spyfall)
+<div align="center">
 
-[**🎮 Play Live Demo**](https://sixurr.netlify.app)
+# 🕵️‍♂️ Sixur Game (KurdishSpy)
 
-**Kurdspyy** is a web-based social deduction game specifically tailored for Kurdish speakers. Inspired by the popular game *Spyfall*, it brings friends and family together to test their deception and deduction skills.
+**The Ultimate Social Deduction Game for Kurdish Speakers**
 
-The game is built with a mobile-first approach, making it perfect for gatherings, parties, and casual hangouts.
+<a href="https://sixurr.netlify.app">
+  <img src="https://img.shields.io/badge/PLAY_LIVE_DEMO-Click_Here_To_Start-2563eb?style=for-the-badge&logo=rocket&logoColor=white" alt="Play Now" height="50" />
+</a>
 
-![Kurdish Spyfall](https://placehold.co/1200x400/2563eb/ffffff?text=Kurdspyy+-+Kurdish+Spyfall)
+<br/>
+<br/>
 
----
+![Sixur Game Preview](https://placehold.co/1200x400/2563eb/ffffff?text=Sixur+Game+-+KurdishSpy)
 
-## ✨ Features
+<br/>
 
-- **🎲 Multiple Categories:** Choose from diverse word packs including:
-  - **Football** (Legends, Modern Stars, Clubs)
-  - **Movies & TV Shows** (Global Hits, Anime, Kurdish Favorites)
-  - **Daily Life** (Jobs, Cars, Food/Meals)
-  - **Gaming** (Clash Royale, PUBG, etc.)
-  - **Famous People** (Kurdish Singers, Global Icons)
-- **🌍 Bilingual Support:** Many categories (Movies, Games, Famous People) display items in both **Kurdish** and **English**, making it accessible to a wider audience.
-- **📱 PWA Support:** Installable as a native-like app on your mobile device (iOS & Android).
-- **🌗 Smooth UI:** Built with **Tailwind CSS** and **Framer Motion** for a modern, fluid user experience using a dark/light mode aesthetic.
-- **⏱️ Game Timer:** Integrated countdown timer to keep the gameplay fast-paced.
-- **👥 Flexible Roles:** Supports variable settings for number of spies and round duration.
+**[Sixur Game](https://sixurr.netlify.app)** brings the thrill of *Spyfall* to your gathering. Tailored specifically with Kurdish culture, language, and humor in mind. 
+It is a mobile-first Progressive Web App (PWA) designed for seamless play on any device.
+
+[Report Bug](https://github.com/abdulhadikamaran/Spy-Game/issues) · [Request Feature](https://github.com/abdulhadikamaran/Spy-Game/issues)
+
+</div>
 
 ---
 
-## 🚀 Getting Started
+## 🌟 Overview
 
-Follow these instructions to run the project locally on your machine.
+**Sixur Game** (also known as *KurdishSpy*) is a web-based multiplayer game designed for parties, cafes, and family gatherings. 
 
-### Prerequisites
+The concept is simple: One player is the **Sixur** (Spy), and everyone else is a **Civilian** at a specific location. The Civilians must find the spy, while the spy must figure out the location—all without revealing too much!
 
-- **Node.js** (v16 or higher)
-- **npm** or **yarn**
+## ✨ Key Features
 
-### Installation
+### 🎲 Curated Kurdish Content
+Hand-crafted word packs that resonate with locals:
+*   **Daily Life**: Jobs like "Sayegh Taxi", "Nanawa", "Peshmerga".
+*   **Football Legends**: Real Madrid vs Barcelona debates, nostalgic players.
+*   **Movies & Anime**: Global hits and specific dubs popular in Kurdistan.
+*   **Kurdish Culture**: Categories specifically for local foods, traditions, and social habits.
 
-1. **Clone the repository** (or download usage files):
-   ```bash
-   git clone https://github.com/yourusername/kurdspyy.git
-   cd kurdspyy
-   ```
+### 🌍 Bilingual & Accessible
+*   **Kurdish & English**: Interface and game cards support both languages, making it easy for everyone to join in regardless of their primary language.
+*   **Cross-Platform**: Works efficiently on iOS, Android, and Desktop.
 
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
-
-4. **Open in browser**:
-   Navigate to `http://localhost:5173` (or the URL shown in your terminal).
+### ⚡ Modern Experience
+*   **Dark Mode**: Sleek, battery-saving dark interface.
+*   **Smooth Animations**: Powered by Framer Motion for a premium feel.
+*   **Instant Play**: No account required. Just create a room and play.
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Live Demo
 
-This project is built using modern web technologies for performance and scalability:
+Don't want to install anything? Play the latest stable version right now:
 
-- **Frontend Framework:** [React 19](https://react.dev/)
-- **Build Tool:** [Vite](https://vitejs.dev/)
-- **Language:** [TypeScript](https://www.typescriptlang.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **State Management:** [Zustand](https://github.com/pmndrs/zustand)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Icons:** [Lucide React](https://lucide.dev/)
+<div align="center">
+
+## [👉 CLICK TO PLAY SIXUR GAME 👈](https://sixurr.netlify.app)  
+*(No installation required)*
+
+</div>
+
+---
+
+## 🛠️ Technology Stack
+
+Built with the latest modern web technologies for performance and scale.
+
+*   **Core:** [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+*   **Build:** [Vite](https://vitejs.dev/)
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+*   **State:** [Zustand](https://github.com/pmndrs/zustand)
+*   **Motion:** [Framer Motion](https://www.framer.com/motion/)
+
+---
+
+## 💻 Local Development
+
+If you're a developer and want to contribute or run it locally:
+
+1.  **Clone the Repo**
+    ```bash
+    git clone https://github.com/abdulhadikamaran/Spy-Game.git
+    cd Spy-Game
+    ```
+
+2.  **Install Dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Start Dev Server**
+    ```bash
+    npm run dev
+    ```
+
+4.  **Open Browser**
+    Go to `http://localhost:5173`
 
 ---
 
 ## 🎮 How to Play
 
-1. **Lobby:** One player creates a room or everyone gathers around one device. Configure settings (Timer, Number of Spies, Categories).
-2. **Handover:** Pass the device around. Each player taps to see their role:
-   - **Civilian:** You see the **Secret Word/Location**.
-   - **Spy:** You see **"YOU ARE THE SPY"** (you don't know the word).
-3. **Question Round:** Players take turns asking each other questions about the secret word.
-   - *Civilian goal:* Identify the Spy without revealing the word too clearly.
-   - *Spy goal:* Blend in, figure out the word, or survive until the timer ends.
-4. **Voting/Guessing:**
-   - At any time (or when the timer ends), players can vote to accuse someone of being the Spy.
-   - The Spy can reveal themselves if they guess the word correctly to steal the win!
+1.  **Lobby:** Create a room on one device. Select your settings (Categories, Timer, # of Spies).
+2.  **Handover:** Pass the device around. Each player taps to see their role:
+    *   **Civilian:** You see the **Secret Word/Location**.
+    *   **Sixur (Spy):** You see **"YOU ARE THE SPY"**. You have no idea where you are!
+3.  **Questions:** Players take turns asking each other questions about the secret location.
+    *   *Goal:* Expose the Spy without revealing the location too clearly.
+    *   *Spy's Goal:* Blend in and guess the location.
+4.  **Verdict:** At any time, vote to catch the Spy, or if you are the Spy, reveal yourself and guess the location to steal the win!
 
 ---
-
-## 📂 Project Structure
-
-```
-src/
-├── components/      # React components (Game, Lobby, UI)
-├── data/            # Word packs and categories (wordPacks.ts)
-├── store/           # Global state management (Zustand)
-├── types.ts         # TypeScript definitions
-├── App.tsx          # Main application component
-└── main.tsx         # Entry point
-```
 
 ## 📜 License
 
