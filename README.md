@@ -11,7 +11,7 @@
 <br/>
 <br/>
 
-![Sixur Game Preview](https://placehold.co/1200x400/2563eb/ffffff?text=Sixur+Game+-+KurdishSpy)
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 
 <br/>
 
