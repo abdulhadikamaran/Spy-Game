@@ -1,5 +1,7 @@
 # 🕵️‍♂️ Kurdspyy (Kurdish Spyfall)
 
+[**🎮 Play Live Demo**](https://sixurr.netlify.app)
+
 **Kurdspyy** is a web-based social deduction game specifically tailored for Kurdish speakers. Inspired by the popular game *Spyfall*, it brings friends and family together to test their deception and deduction skills.
 
 The game is built with a mobile-first approach, making it perfect for gatherings, parties, and casual hangouts.
