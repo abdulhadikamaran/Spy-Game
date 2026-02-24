@@ -47,24 +47,45 @@ export const InstallPrompt: React.FC = () => {
         const handleBeforeInstall = (e: Event) => {
             e.preventDefault();
             setDeferredPrompt(e as BeforeInstallPromptEvent);
-            setShowAndroidPrompt(true);
+            // Only show if tutorial is already done
+            if (localStorage.getItem('sixur-tutorial-seen')) {
+                setShowAndroidPrompt(true);
+            }
         };
 
         window.addEventListener('beforeinstallprompt', handleBeforeInstall);
 
-        // Show iOS prompt after a delay if on iOS Safari
-        if (isIOS() && !isStandalone()) {
+        // Wait for tutorial to close before showing install prompt
+        const handleTutorialClosed = () => {
+            setTimeout(() => {
+                if (deferredPrompt) {
+                    setShowAndroidPrompt(true);
+                }
+                if (isIOS() && !isStandalone()) {
+                    setShowIOSPrompt(true);
+                }
+            }, 1500); // 1.5s delay after tutorial closes
+        };
+
+        if (!localStorage.getItem('sixur-tutorial-seen')) {
+            window.addEventListener('tutorial-closed', handleTutorialClosed);
+        }
+
+        // Show iOS prompt after a delay if on iOS Safari (and tutorial already seen)
+        if (isIOS() && !isStandalone() && localStorage.getItem('sixur-tutorial-seen')) {
             const timer = setTimeout(() => {
                 setShowIOSPrompt(true);
             }, 3000);
             return () => {
                 clearTimeout(timer);
                 window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+                window.removeEventListener('tutorial-closed', handleTutorialClosed);
             };
         }
 
         return () => {
             window.removeEventListener('beforeinstallprompt', handleBeforeInstall);
+            window.removeEventListener('tutorial-closed', handleTutorialClosed);
         };
     }, []);
 
