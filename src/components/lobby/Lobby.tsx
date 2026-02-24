@@ -42,7 +42,9 @@ export const Lobby: React.FC = () => {
   const [toastMsg, setToastMsg] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
-  const [isHowToPlayOpen, setIsHowToPlayOpen] = useState(false);
+  const [isHowToPlayOpen, setIsHowToPlayOpen] = useState(() => {
+    return !localStorage.getItem('sixur-tutorial-seen');
+  });
 
   // Show pulse animation on ? button for first-time visitors
   const [isFirstVisit] = useState(() => {
@@ -52,7 +54,13 @@ export const Lobby: React.FC = () => {
 
   const handleOpenTutorial = useCallback(() => {
     setIsHowToPlayOpen(true);
+  }, []);
+
+  const handleCloseTutorial = useCallback(() => {
+    setIsHowToPlayOpen(false);
     localStorage.setItem('sixur-tutorial-seen', 'true');
+    // Dispatch event so InstallPrompt knows tutorial is done
+    window.dispatchEvent(new Event('tutorial-closed'));
   }, []);
 
   const triggerToast = useCallback((msg: string) => {
@@ -169,7 +177,7 @@ export const Lobby: React.FC = () => {
       </header>
 
       {/* How To Play Modal */}
-      <HowToPlay isOpen={isHowToPlayOpen} onClose={() => setIsHowToPlayOpen(false)} />
+      <HowToPlay isOpen={isHowToPlayOpen} onClose={handleCloseTutorial} />
 
       <main className="flex-grow w-full max-w-lg mx-auto px-4 flex flex-col gap-6 z-10 mt-6 pb-12">
 
