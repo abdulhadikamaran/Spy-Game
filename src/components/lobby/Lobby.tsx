@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { WordSource } from '../../types';
 import { Toast } from '../ui/Toast';
 import { Icon } from '../ui/Icon';
+import { HowToPlay } from '../ui/HowToPlay';
 import { SpySelector } from './SpySelector';
 import { CustomWordEditor } from './CustomWordEditor';
 import { CategoryModal } from './CategoryModal';
@@ -41,6 +42,18 @@ export const Lobby: React.FC = () => {
   const [toastMsg, setToastMsg] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isHowToPlayOpen, setIsHowToPlayOpen] = useState(false);
+
+  // Show pulse animation on ? button for first-time visitors
+  const [isFirstVisit] = useState(() => {
+    const seen = localStorage.getItem('sixur-tutorial-seen');
+    return !seen;
+  });
+
+  const handleOpenTutorial = useCallback(() => {
+    setIsHowToPlayOpen(true);
+    localStorage.setItem('sixur-tutorial-seen', 'true');
+  }, []);
 
   const triggerToast = useCallback((msg: string) => {
     setToastMsg(msg);
@@ -133,7 +146,16 @@ export const Lobby: React.FC = () => {
         <div className="absolute bottom-[10%] -left-[10%] w-[400px] h-[400px] rounded-full bg-primary/5 blur-[100px]"></div>
       </div>
 
-      <header className="flex-none pt-12 pb-4 px-6 z-10 flex flex-col items-center justify-center text-center">
+      <header className="flex-none pt-12 pb-4 px-6 z-10 flex flex-col items-center justify-center text-center relative">
+        {/* How To Play Button */}
+        <button
+          onClick={handleOpenTutorial}
+          className={`absolute top-6 left-4 w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center transition-all duration-200 active:scale-95 ${isFirstVisit ? 'animate-pulse' : ''}`}
+          title="چۆن یاری بکەم؟"
+        >
+          <Icon name="info" className="text-lg text-white/70" />
+        </button>
+
         <h1 className="font-display font-black text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-text-muted drop-shadow-sm leading-tight">
           سیخوڕ
         </h1>
@@ -145,6 +167,9 @@ export const Lobby: React.FC = () => {
           <span className="w-12 h-[2px] bg-gradient-to-l from-transparent to-primary rounded-full"></span>
         </div>
       </header>
+
+      {/* How To Play Modal */}
+      <HowToPlay isOpen={isHowToPlayOpen} onClose={() => setIsHowToPlayOpen(false)} />
 
       <main className="flex-grow w-full max-w-lg mx-auto px-4 flex flex-col gap-6 z-10 mt-6 pb-12">
 
