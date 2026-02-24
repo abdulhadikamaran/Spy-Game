@@ -50,22 +50,27 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // For navigation requests, try network first, then cache
+    // For navigation requests, use Stale-While-Revalidate:
+    // Serve cached version instantly, update cache in background
     if (request.mode === 'navigate') {
         event.respondWith(
-            fetch(request)
-                .then((response) => {
-                    // Cache the new response
-                    const responseClone = response.clone();
-                    caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(request, responseClone);
-                    });
-                    return response;
-                })
-                .catch(() => {
-                    // If offline, serve from cache
-                    return caches.match('/index.html');
-                })
+            caches.match('/index.html').then((cachedResponse) => {
+                // Update cache in the background (don't wait for it)
+                const fetchPromise = fetch(request)
+                    .then((networkResponse) => {
+                        if (networkResponse && networkResponse.status === 200) {
+                            const responseClone = networkResponse.clone();
+                            caches.open(CACHE_NAME).then((cache) => {
+                                cache.put('/index.html', responseClone);
+                            });
+                        }
+                        return networkResponse;
+                    })
+                    .catch(() => null); // Silently ignore network errors
+
+                // Return cached version immediately, or wait for network if no cache
+                return cachedResponse || fetchPromise;
+            })
         );
         return;
     }
