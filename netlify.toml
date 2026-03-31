@@ -16,7 +16,7 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Cache PWA files appropriately
+# Cache PWA service worker - must revalidate every time
 [[headers]]
   for = "/sw.js"
   [headers.values]

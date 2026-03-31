@@ -48,7 +48,7 @@ export const Handover: React.FC = () => {
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[20%] -right-[20%] w-[80vw] h-[80vw] rounded-full border-[40px] border-white/5 opacity-50 blur-3xl"></div>
         <div className="absolute top-[30%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[#7D1416]/40 blur-3xl mix-blend-screen"></div>
-        <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuA4WgIYFPWZANALDqYQgzuOEsxnBSGtp18P8MnA9cO_imz7bah6NTOv-uO2lDoBPfgKKJCc9_c4dxAx3pzZ-nYesf-Py6qsiB8Pc9ChRTXUmWLHhXY4Yi6Jc2OOdMA_JNSdiQJuUuf4YIy7bozKF9aGB_VoAIilii_LNUFsb1FedlOLgSnDOUSTp1MlA41Cywo3g5RHpe-W_t4wVKoD0IgyLaZi5q-JOM8HZ26zdi4SSdbHEyrnMe6pvxFDF9YEii_EpXvjeS0RoMUM')" }}></div>
+        <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }}></div>
       </div>
 
       <header className="relative z-10 w-full flex justify-between items-start pt-6 px-4 pb-4">

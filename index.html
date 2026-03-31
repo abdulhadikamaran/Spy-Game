@@ -16,9 +16,6 @@
   <meta name="color-scheme" content="dark" />
   <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="/manifest.json" />
-
   <!-- iOS Specific -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -39,24 +36,6 @@
   <meta property="og:description" content="یاری سیخوڕی کوردی - Kurdish Spyfall Game" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/icon-512.png" />
-
-  <!-- Local Styles -->
-  <link rel="stylesheet" href="/index.css">
-
-  <!-- Register Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then((reg) => {
-            console.log('[PWA] Service worker registered:', reg.scope);
-          })
-          .catch((err) => {
-            console.log('[PWA] Service worker registration failed:', err);
-          });
-      });
-    }
-  </script>
 </head>
 
 <body>
