@@ -138,7 +138,7 @@ export const Lobby: React.FC = () => {
   const isReady = players.length >= 3;
 
   return (
-    <div className="bg-background min-h-screen flex flex-col font-sans text-text-main selection:bg-primary selection:text-white relative overflow-x-hidden">
+    <div className="bg-background min-h-[100dvh] flex flex-col font-sans text-text-main selection:bg-primary selection:text-white relative overflow-x-hidden">
       <Toast message={toastMsg} isVisible={showToast} onClose={() => setShowToast(false)} />
 
       <CategoryModal
@@ -149,9 +149,9 @@ export const Lobby: React.FC = () => {
       />
 
       {/* Background Ambience */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full bg-primary/5 blur-[100px]"></div>
-        <div className="absolute bottom-[10%] -left-[10%] w-[400px] h-[400px] rounded-full bg-primary/5 blur-[100px]"></div>
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(192, 25, 31, 0.08) 0%, rgba(192, 25, 31, 0) 70%)' }}></div>
+        <div className="absolute bottom-[10%] -left-[10%] w-[400px] h-[400px] rounded-full" style={{ background: 'radial-gradient(circle, rgba(192, 25, 31, 0.08) 0%, rgba(192, 25, 31, 0) 70%)' }}></div>
       </div>
 
       <header className="flex-none pt-12 pb-4 px-6 z-10 flex flex-col items-center justify-center text-center relative">

@@ -126,7 +126,7 @@ export const GameTimer: React.FC = React.memo(() => {
   const timerColor = isUrgent ? '#FF3333' : '#FFFFFF';
 
   return (
-    <div className={`bg-background min-h-screen font-display text-white overflow-hidden relative flex flex-col items-center transition-colors duration-500 ${isUrgent ? 'bg-[#1a0505]' : 'bg-background'}`}>
+    <div className={`bg-background min-h-[100dvh] font-display text-white overflow-hidden relative flex flex-col items-center transition-colors duration-500 ${isUrgent ? 'bg-[#1a0505]' : 'bg-background'}`}>
       <motion.div
         animate={{ opacity: isUrgent && !isPaused ? [0, 0.2, 0] : 0.05 }}
         transition={{ duration: isUrgent ? 1 : 4, repeat: Infinity }}
@@ -169,7 +169,7 @@ export const GameTimer: React.FC = React.memo(() => {
         </div>
 
         <div className="relative w-80 h-80 flex items-center justify-center">
-          <div className={`absolute inset-0 rounded-full blur-3xl transition-colors duration-1000 ${isUrgent ? 'bg-primary/30' : 'bg-white/5'}`}></div>
+          <div className="absolute inset-0 rounded-full transition-colors duration-1000" style={{ background: isUrgent ? 'radial-gradient(circle, rgba(192,25,31,0.3) 0%, transparent 60%)' : 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 60%)' }}></div>
 
           <svg className="w-full h-full transform -rotate-90 drop-shadow-2xl" viewBox="0 0 260 260">
             <circle cx="130" cy="130" r={radius} stroke="rgba(255,255,255,0.05)" strokeWidth="12" fill="transparent" />

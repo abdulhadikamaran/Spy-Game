@@ -38,7 +38,7 @@ export const Handover: React.FC = () => {
 
   return (
     <motion.div
-      className="bg-[#371211] min-h-screen w-full flex flex-col relative overflow-hidden font-display text-white selection:bg-[#E51E1B] selection:text-white cursor-pointer"
+      className="bg-[#371211] min-h-[100dvh] w-full flex flex-col relative overflow-hidden font-display text-white selection:bg-[#E51E1B] selection:text-white cursor-pointer"
       dir="rtl"
       initial={{ rotateY: 0, opacity: 1 }}
       animate={controls}
@@ -46,8 +46,8 @@ export const Handover: React.FC = () => {
       onClick={handleTap}
     >
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-[20%] -right-[20%] w-[80vw] h-[80vw] rounded-full border-[40px] border-white/5 opacity-50 blur-3xl"></div>
-        <div className="absolute top-[30%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[#7D1416]/40 blur-3xl mix-blend-screen"></div>
+        <div className="absolute -top-[20%] -right-[20%] w-[80vw] h-[80vw] rounded-full opacity-50" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 70%)' }}></div>
+        <div className="absolute top-[30%] -left-[10%] w-[70vw] h-[70vw] rounded-full mix-blend-screen" style={{ background: 'radial-gradient(circle, rgba(125,20,22,0.4) 0%, rgba(125,20,22,0) 70%)' }}></div>
         <div className="absolute inset-0 opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E\")" }}></div>
       </div>
 

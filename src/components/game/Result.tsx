@@ -14,10 +14,10 @@ export const Result: React.FC = () => {
   const imposterNames = imposters.map(p => p.name).join(' ، ');
 
   return (
-    <div className="bg-background min-h-screen flex flex-col relative overflow-hidden text-text-light transition-colors duration-300">
+    <div className="bg-background min-h-[100dvh] flex flex-col relative overflow-hidden text-text-light transition-colors duration-300">
       <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.05) 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}></div>
 
-      <div className="relative z-10 flex flex-col h-full min-h-screen w-full max-w-md mx-auto p-6 justify-between">
+      <div className="relative z-10 flex flex-col h-full min-h-[100dvh] w-full max-w-md mx-auto p-6 justify-between">
         <header className="flex flex-col items-center pt-8">
           <h1 className="text-text-light text-xl font-bold tracking-wide uppercase opacity-90 mb-1">ئەنجامی یاری</h1>
           <div className="h-1 w-12 bg-text-light/20 rounded-full"></div>
