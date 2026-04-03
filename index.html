@@ -36,10 +36,128 @@
   <meta property="og:description" content="یاری سیخوڕی کوردی - Kurdish Spyfall Game" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/icon-512.png" />
+
+  <!-- RESCUE STYLES — renders BEFORE any JS/CSS bundle loads -->
+  <style id="rescue-styles">
+    body { margin: 0; background: #282F32; }
+    #splash-loader {
+      position: fixed; inset: 0; z-index: 99999;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: #282F32; color: #FDE3CF;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      text-align: center; padding: 24px;
+      transition: opacity 0.4s ease;
+    }
+    #splash-loader.loaded { opacity: 0; pointer-events: none; }
+    #splash-spinner {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 4px solid rgba(253,227,207,0.15);
+      border-top-color: #C0191F;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #splash-title { font-size: 32px; font-weight: 900; margin-top: 24px; color: #fff; }
+    #splash-sub { font-size: 14px; margin-top: 8px; opacity: 0.6; }
+    #splash-error {
+      display: none; margin-top: 24px; padding: 16px;
+      background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.4);
+      border-radius: 16px; max-width: 340px; width: 100%;
+      text-align: left; direction: ltr; font-size: 12px;
+      color: #fca5a5; font-family: monospace; word-break: break-all;
+      max-height: 200px; overflow-y: auto;
+    }
+    #splash-fix-btn {
+      display: none; margin-top: 20px;
+      background: #C0191F; color: #ffffff; border: none;
+      padding: 14px 32px; border-radius: 14px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    #splash-fix-btn:active { transform: scale(0.96); }
+  </style>
 </head>
 
 <body>
+  <!-- SPLASH LOADER — visible immediately, hidden when React mounts -->
+  <div id="splash-loader">
+    <div id="splash-spinner"></div>
+    <div id="splash-title">سیخوڕ</div>
+    <div id="splash-sub">چاوەڕێ بکە...</div>
+    <div id="splash-error"></div>
+    <button id="splash-fix-btn" onclick="fixAndReload()">🔧 چاککردن و نوێکردنەوە</button>
+  </div>
+
   <div id="root"></div>
+
+  <!-- RESCUE SCRIPT — plain JS, runs BEFORE any module or SW. Catches everything. -->
+  <script>
+    // 1. Catch ALL errors globally (including module parse failures)
+    window.onerror = function(msg, url, line, col, error) {
+      showError('Error: ' + msg + '\nFile: ' + url + '\nLine: ' + line);
+      return true;
+    };
+    window.addEventListener('unhandledrejection', function(e) {
+      showError('Promise Error: ' + (e.reason ? (e.reason.message || e.reason) : 'Unknown'));
+    });
+
+    function showError(text) {
+      var el = document.getElementById('splash-error');
+      var btn = document.getElementById('splash-fix-btn');
+      if (el) { el.style.display = 'block'; el.textContent = text; }
+      if (btn) { btn.style.display = 'inline-block'; }
+    }
+
+    // 2. If app hasn't loaded within 8 seconds, show the fix button
+    var appLoaded = false;
+    window.__sixurAppLoaded = function() { appLoaded = true; hideSplash(); };
+    setTimeout(function() {
+      if (!appLoaded) {
+        var btn = document.getElementById('splash-fix-btn');
+        var sub = document.getElementById('splash-sub');
+        if (btn) btn.style.display = 'inline-block';
+        if (sub) sub.textContent = 'بارکردن زۆر درەنگ بوو...';
+      }
+    }, 8000);
+
+    // 3. Hide splash when React is ready
+    function hideSplash() {
+      var splash = document.getElementById('splash-loader');
+      if (splash) {
+        splash.classList.add('loaded');
+        setTimeout(function() { splash.remove(); }, 500);
+      }
+    }
+
+    // 4. The nuclear fix button: unregister ALL service workers, clear caches, reload
+    function fixAndReload() {
+      var btn = document.getElementById('splash-fix-btn');
+      if (btn) btn.textContent = '⏳ چاوەڕێ بکە...';
+
+      // Clear all caches
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          return Promise.all(names.map(function(name) { return caches.delete(name); }));
+        }).catch(function() {});
+      }
+
+      // Unregister all service workers
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          var promises = registrations.map(function(r) { return r.unregister(); });
+          return Promise.all(promises);
+        }).then(function() {
+          // Hard reload after cleanup
+          window.location.replace(window.location.href.split('?')[0] + '?cache_bust=' + Date.now());
+        }).catch(function() {
+          window.location.reload();
+        });
+      } else {
+        window.location.reload();
+      }
+    }
+  </script>
+
   <script type="module" src="/src/main.tsx"></script>
 </body>
 

@@ -17,3 +17,8 @@ root.render(
     </ErrorBoundary>
   </React.StrictMode>
 );
+
+// Signal to the inline rescue script that the app has loaded successfully
+if (typeof (window as any).__sixurAppLoaded === 'function') {
+  (window as any).__sixurAppLoaded();
+}
